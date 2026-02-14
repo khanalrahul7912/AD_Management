@@ -216,13 +216,19 @@ For production deployment, consider using:
 - Ensure bind user has sufficient permissions
 - Some operations require Domain Admin privileges
 
+## Documentation
+
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Comprehensive production deployment guide
+- **[SCREENSHOTS.md](SCREENSHOTS.md)** - UI overview and screenshots
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
+
 ## License
 
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT License](LICENSE).
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit pull requests or open issues.
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
 
 ## Author
 
@@ -231,3 +237,11 @@ Developed for Active Directory management via web interface.
 ## Support
 
 For issues and questions, please open an issue on GitHub.
+
+## Acknowledgments
+
+Built with:
+- [Flask](https://flask.palletsprojects.com/) - Web framework
+- [ldap3](https://ldap3.readthedocs.io/) - LDAP operations
+- [Bootstrap 5](https://getbootstrap.com/) - UI framework
+- [Bootstrap Icons](https://icons.getbootstrap.com/) - Icon library
