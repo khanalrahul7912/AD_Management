@@ -2,6 +2,10 @@
 
 A comprehensive Flask-based web application for managing Active Directory (AD) objects including users, groups, computers, and mailing groups.
 
+## 🚀 Quick Start
+
+New to the project? Check out the **[Quick Start Guide](QUICKSTART.md)** to get up and running in 5 minutes!
+
 ## Features
 
 ### User Management
@@ -218,6 +222,7 @@ For production deployment, consider using:
 
 ## Documentation
 
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes!
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - Comprehensive production deployment guide
 - **[SCREENSHOTS.md](SCREENSHOTS.md)** - UI overview and screenshots
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
