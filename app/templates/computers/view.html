@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}View Computer - AD Management{% endblock %}
+{% block page_title %}Computer: {{ computer.name }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{{ url_for('computers.list_computers') }}" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Back to Computers
+    </a>
+    <a href="{{ url_for('computers.edit_computer', computer_name=computer.name) }}" class="btn btn-warning">
+        <i class="bi bi-pencil"></i> Edit
+    </a>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        <i class="bi bi-trash"></i> Delete
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Computer Information</h5>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{ computer.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>DNS Name:</th>
+                        <td>{{ computer.dns_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Operating System:</th>
+                        <td>{{ computer.os }}</td>
+                    </tr>
+                    <tr>
+                        <th>OS Version:</th>
+                        <td>{{ computer.os_version }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td>{{ computer.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Distinguished Name:</th>
+                        <td><small>{{ computer.dn }}</small></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Group Memberships</h5>
+            </div>
+            <div class="card-body">
+                {% if computer.member_of %}
+                    <ul class="list-group">
+                        {% for group_dn in computer.member_of %}
+                            <li class="list-group-item">
+                                <small>{{ group_dn }}</small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">No group memberships.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete computer <strong>{{ computer.name }}</strong>? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="POST" action="{{ url_for('computers.delete_computer', computer_name=computer.name) }}" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

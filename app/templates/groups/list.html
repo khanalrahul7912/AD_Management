@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Groups - AD Management{% endblock %}
+{% block page_title %}Groups{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <a href="{{ url_for('groups.create_group') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create Group
+        </a>
+    </div>
+    <div>
+        <form method="GET" action="{{ url_for('groups.search_groups') }}" class="d-flex">
+            <input type="text" class="form-control me-2" name="q" placeholder="Search groups..." value="{{ query or '' }}">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </form>
+    </div>
+</div>
+
+{% if query %}
+<div class="alert alert-info">
+    Search results for: <strong>{{ query }}</strong>
+    <a href="{{ url_for('groups.list_groups') }}" class="btn btn-sm btn-outline-secondary ms-2">Clear</a>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Scope</th>
+                        <th>Members</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if groups %}
+                        {% for group in groups %}
+                        <tr>
+                            <td>{{ group.name }}</td>
+                            <td>
+                                {% if group.type == 'Security' %}
+                                    <span class="badge bg-primary">{{ group.type }}</span>
+                                {% else %}
+                                    <span class="badge bg-info">{{ group.type }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ group.scope }}</td>
+                            <td>{{ group.member_count }}</td>
+                            <td>{{ group.email }}</td>
+                            <td>
+                                <a href="{{ url_for('groups.view_group', group_name=group.name) }}" class="btn btn-sm btn-info" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a href="{{ url_for('groups.edit_group', group_name=group.name) }}" class="btn btn-sm btn-warning" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">No groups found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
